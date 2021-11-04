@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"strconv"
 	"time"
 
 	"github.com/atomicgo/cursor"
@@ -41,6 +42,10 @@ func main() {
 	}
 	fmt.Print("Choose seed [seed]> ")
 	fmt.Scanln(&seed)
+	if seed == 0 {
+		seed = time.Now().Unix()
+		fmt.Println("Seed: " + strconv.Itoa(int(seed)))
+	}
 	fmt.Print("Choose timestep [ms]> ")
 	fmt.Scanln(&timeStep)
 
