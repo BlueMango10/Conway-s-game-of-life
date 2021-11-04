@@ -95,16 +95,18 @@ func showCells(cells [][]bool, overwrite bool) {
 	if overwrite {
 		cursor.Up(size.Y)
 	}
+	str := ""
 	for _, row := range cells {
 		for _, cell := range row {
 			if cell {
-				fmt.Print("■ ")
+				str += "■ "
 			} else {
-				fmt.Print("  ")
+				str += "  "
 			}
 		}
-		fmt.Println()
+		str += "\n\r"
 	}
+	print(str)
 }
 
 func generateCells(cells *[][]bool) {
