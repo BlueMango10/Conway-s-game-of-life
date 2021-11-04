@@ -23,6 +23,7 @@ var (
 	size     Vector2Int
 	cells    [][]bool
 	timeStep int
+	seed     int64
 
 	neighbours = []Vector2Int{
 		{X: -1, Y: -1}, {X: 0, Y: -1}, {X: 1, Y: -1},
@@ -38,6 +39,8 @@ func main() {
 	for i := range cells {
 		cells[i] = make([]bool, size.X)
 	}
+	fmt.Print("Choose seed [seed]> ")
+	fmt.Scanln(&seed)
 	fmt.Print("Choose timestep [ms]> ")
 	fmt.Scanln(&timeStep)
 
@@ -49,7 +52,7 @@ func main() {
 		}
 		generateGlider(&cells)
 	} else {
-		generateCells(&cells)
+		generateCells(&cells, seed)
 	}
 	showCells(cells, false)
 	for {
@@ -109,7 +112,8 @@ func showCells(cells [][]bool, overwrite bool) {
 	print(str)
 }
 
-func generateCells(cells *[][]bool) {
+func generateCells(cells *[][]bool, seed int64) {
+	rand.Seed(seed)
 	c := *cells
 	for y, row := range c {
 		for x := range row {
